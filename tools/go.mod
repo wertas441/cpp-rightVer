@@ -196,9 +196,9 @@ require (
 	github.com/subosito/gotenv v1.6.0 // indirect
 	github.com/throttled/throttled/v2 v2.12.0 // indirect
 	github.com/tmthrgd/go-hex v0.0.0-20190904060850-447a3041c3bc // indirect
-	github.com/uptrace/bun v1.2.3 // indirect
-	github.com/uptrace/bun/dialect/pgdialect v1.2.3 // indirect
-	github.com/uptrace/bun/driver/pgdriver v1.2.3 // indirect
+	github.com/uptrace/bun v1.2.5 // indirect
+	github.com/uptrace/bun/dialect/pgdialect v1.2.5 // indirect
+	github.com/uptrace/bun/driver/pgdriver v1.2.5 // indirect
 	github.com/vmihailenco/msgpack/v5 v5.4.1 // indirect
 	github.com/vmihailenco/tagparser/v2 v2.0.0 // indirect
 	github.com/weppos/publicsuffix-go v0.30.0 // indirect
@@ -257,5 +257,5 @@ require (
 	gopkg.in/square/go-jose.v2 v2.6.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 	k8s.io/klog/v2 v2.100.1 // indirect
-	mellium.im/sasl v0.3.1 // indirect
+	mellium.im/sasl v0.3.2 // indirect
 )
