@@ -126,6 +126,7 @@ describe('Gateway general settings', () => {
       .and('eq', 'Stable')
     cy.findByRole('button', { name: 'Save changes' }).should('be.visible')
     cy.findByRole('button', { name: /Delete gateway/ }).should('be.visible')
+    cy.get('button[type="submit').scrollIntoView()
     cy.findByRole('heading', { name: 'LoRaWAN options' }).should('be.visible')
     cy.findByText('Frequency plan').should('not.exist')
     cy.findByRole('button', { name: 'Expand' }).click()
