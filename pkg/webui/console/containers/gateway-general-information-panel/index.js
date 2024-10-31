@@ -121,11 +121,6 @@ const GatewayGeneralInformationPanel = () => {
       header: m.networkSettings,
       items: [
         {
-          key: sharedMessages.automaticUpdates,
-          tooltipMessage: m.autoUpdateDescription,
-          value: getNetworkSettingsInfo(auto_update),
-        },
-        {
           key: sharedMessages.requireAuthenticatedConnection,
           tooltipMessage: m.requireAuthenticatedConnectionDescription,
           value: getNetworkSettingsInfo(require_authenticated_connection),
