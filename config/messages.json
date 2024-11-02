@@ -4949,6 +4949,15 @@
       "file": "grpc.go"
     }
   },
+  "error:pkg/gatewayconfigurationserver/managed:managed_gateway_configuration_server_not_enabled": {
+    "translations": {
+      "en": "managed gateway configuration server is not enabled"
+    },
+    "description": {
+      "package": "pkg/gatewayconfigurationserver/managed",
+      "file": "grpc_disabled.go"
+    }
+  },
   "error:pkg/gatewayconfigurationserver/managed:no_profile_name": {
     "translations": {
       "en": "no profile name set"
