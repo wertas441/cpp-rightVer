@@ -2344,6 +2344,7 @@
   "error:pkg/frequencyplans:read_base": "周波数プラン `{id}` のベース `{base_id}` を読み込めません",
   "error:pkg/frequencyplans:read_list": "周波数プランリストを読み込めません",
   "error:pkg/gatewayconfigurationserver/managed:gateway_not_managed": "",
+  "error:pkg/gatewayconfigurationserver/managed:managed_gateway_configuration_server_not_enabled": "",
   "error:pkg/gatewayconfigurationserver/managed:no_profile_name": "",
   "error:pkg/gatewayconfigurationserver/managed:no_ssid": "",
   "error:pkg/gatewayconfigurationserver/ttkg:unauthenticated": "",
