@@ -12,13 +12,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package rights
+package rights_test
 
 import (
 	"context"
 	"sync"
 	"testing"
 
+	"go.thethings.network/lorawan-stack/v3/pkg/auth/rights"
 	"go.thethings.network/lorawan-stack/v3/pkg/errors"
 	"go.thethings.network/lorawan-stack/v3/pkg/ttnpb"
 	"go.thethings.network/lorawan-stack/v3/pkg/unique"
@@ -36,11 +37,11 @@ func requireAuthInfo(ctx context.Context) (res struct {
 	var wg sync.WaitGroup
 	wg.Add(2)
 	go func() {
-		res.UniversalErr = RequireUniversal(ctx, ttnpb.Right_RIGHT_SEND_INVITES)
+		res.UniversalErr = rights.RequireUniversal(ctx, ttnpb.Right_RIGHT_SEND_INVITES)
 		wg.Done()
 	}()
 	go func() {
-		res.IsAdminErr = RequireIsAdmin(ctx)
+		res.IsAdminErr = rights.RequireIsAdmin(ctx)
 		wg.Done()
 	}()
 	wg.Wait()
@@ -58,31 +59,31 @@ func requireRights(ctx context.Context, id string) (res struct {
 	var wg sync.WaitGroup
 	wg.Add(5)
 	go func() {
-		res.AppErr = RequireApplication(ctx, &ttnpb.ApplicationIdentifiers{
+		res.AppErr = rights.RequireApplication(ctx, &ttnpb.ApplicationIdentifiers{
 			ApplicationId: id,
 		}, ttnpb.Right_RIGHT_APPLICATION_INFO)
 		wg.Done()
 	}()
 	go func() {
-		res.CliErr = RequireClient(ctx, &ttnpb.ClientIdentifiers{
+		res.CliErr = rights.RequireClient(ctx, &ttnpb.ClientIdentifiers{
 			ClientId: id,
 		}, ttnpb.Right_RIGHT_CLIENT_INFO)
 		wg.Done()
 	}()
 	go func() {
-		res.GtwErr = RequireGateway(ctx, &ttnpb.GatewayIdentifiers{
+		res.GtwErr = rights.RequireGateway(ctx, &ttnpb.GatewayIdentifiers{
 			GatewayId: id,
 		}, ttnpb.Right_RIGHT_GATEWAY_INFO)
 		wg.Done()
 	}()
 	go func() {
-		res.OrgErr = RequireOrganization(ctx, &ttnpb.OrganizationIdentifiers{
+		res.OrgErr = rights.RequireOrganization(ctx, &ttnpb.OrganizationIdentifiers{
 			OrganizationId: id,
 		}, ttnpb.Right_RIGHT_ORGANIZATION_INFO)
 		wg.Done()
 	}()
 	go func() {
-		res.UsrErr = RequireUser(ctx, &ttnpb.UserIdentifiers{
+		res.UsrErr = rights.RequireUser(ctx, &ttnpb.UserIdentifiers{
 			UserId: id,
 		}, ttnpb.Right_RIGHT_USER_INFO)
 		wg.Done()
@@ -96,59 +97,59 @@ func TestRequire(t *testing.T) {
 	a, ctx := test.New(t)
 
 	a.So(func() {
-		_ = RequireUniversal(ctx, ttnpb.Right_RIGHT_SEND_INVITES)
+		_ = rights.RequireUniversal(ctx, ttnpb.Right_RIGHT_SEND_INVITES)
 	}, should.Panic)
 	a.So(func() {
-		_ = RequireIsAdmin(ctx)
+		_ = rights.RequireIsAdmin(ctx)
 	}, should.Panic)
 	a.So(func() {
-		_ = RequireApplication(ctx, &ttnpb.ApplicationIdentifiers{}, ttnpb.Right_RIGHT_APPLICATION_INFO)
+		_ = rights.RequireApplication(ctx, &ttnpb.ApplicationIdentifiers{}, ttnpb.Right_RIGHT_APPLICATION_INFO)
 	}, should.Panic)
 	a.So(func() {
-		_ = RequireClient(ctx, &ttnpb.ClientIdentifiers{}, ttnpb.Right_RIGHT_CLIENT_INFO)
+		_ = rights.RequireClient(ctx, &ttnpb.ClientIdentifiers{}, ttnpb.Right_RIGHT_CLIENT_INFO)
 	}, should.Panic)
 	a.So(func() {
-		_ = RequireGateway(ctx, &ttnpb.GatewayIdentifiers{}, ttnpb.Right_RIGHT_GATEWAY_INFO)
+		_ = rights.RequireGateway(ctx, &ttnpb.GatewayIdentifiers{}, ttnpb.Right_RIGHT_GATEWAY_INFO)
 	}, should.Panic)
 	a.So(func() {
-		_ = RequireOrganization(ctx, &ttnpb.OrganizationIdentifiers{}, ttnpb.Right_RIGHT_ORGANIZATION_INFO)
+		_ = rights.RequireOrganization(ctx, &ttnpb.OrganizationIdentifiers{}, ttnpb.Right_RIGHT_ORGANIZATION_INFO)
 	}, should.Panic)
 	a.So(func() {
-		_ = RequireUser(ctx, &ttnpb.UserIdentifiers{}, ttnpb.Right_RIGHT_USER_INFO)
+		_ = rights.RequireUser(ctx, &ttnpb.UserIdentifiers{}, ttnpb.Right_RIGHT_USER_INFO)
 	}, should.Panic)
 
 	var (
 		fooCtx = ctx
 		fooID  = "foo"
 	)
-	fooCtx = NewContext(fooCtx, &Rights{
-		ApplicationRights: *NewMap(map[string]*ttnpb.Rights{
+	fooCtx = rights.NewContext(fooCtx, &rights.Rights{
+		ApplicationRights: *rights.NewMap(map[string]*ttnpb.Rights{
 			unique.ID(fooCtx, &ttnpb.ApplicationIdentifiers{
 				ApplicationId: fooID,
 			}): ttnpb.RightsFrom(ttnpb.Right_RIGHT_APPLICATION_INFO),
 		}),
-		ClientRights: *NewMap(map[string]*ttnpb.Rights{
+		ClientRights: *rights.NewMap(map[string]*ttnpb.Rights{
 			unique.ID(fooCtx, &ttnpb.ClientIdentifiers{
 				ClientId: fooID,
 			}): ttnpb.RightsFrom(ttnpb.Right_RIGHT_CLIENT_INFO),
 		}),
-		GatewayRights: *NewMap(map[string]*ttnpb.Rights{
+		GatewayRights: *rights.NewMap(map[string]*ttnpb.Rights{
 			unique.ID(fooCtx, &ttnpb.GatewayIdentifiers{
 				GatewayId: fooID,
 			}): ttnpb.RightsFrom(ttnpb.Right_RIGHT_GATEWAY_INFO),
 		}),
-		OrganizationRights: *NewMap(map[string]*ttnpb.Rights{
+		OrganizationRights: *rights.NewMap(map[string]*ttnpb.Rights{
 			unique.ID(fooCtx, &ttnpb.OrganizationIdentifiers{
 				OrganizationId: fooID,
 			}): ttnpb.RightsFrom(ttnpb.Right_RIGHT_ORGANIZATION_INFO),
 		}),
-		UserRights: *NewMap(map[string]*ttnpb.Rights{
+		UserRights: *rights.NewMap(map[string]*ttnpb.Rights{
 			unique.ID(fooCtx, &ttnpb.UserIdentifiers{
 				UserId: fooID,
 			}): ttnpb.RightsFrom(ttnpb.Right_RIGHT_USER_INFO),
 		}),
 	})
-	fooCtx = NewContextWithAuthInfo(fooCtx, &ttnpb.AuthInfoResponse{
+	fooCtx = rights.NewContextWithAuthInfo(fooCtx, &ttnpb.AuthInfoResponse{
 		UniversalRights: ttnpb.RightsFrom(ttnpb.Right_RIGHT_SEND_INVITES),
 		IsAdmin:         true,
 	})
@@ -164,7 +165,7 @@ func TestRequire(t *testing.T) {
 	a.So(fooEntityRes.UsrErr, should.BeNil)
 
 	mockErr := errors.New("mock")
-	errFetchCtx := NewContextWithFetcher(test.Context(), &mockFetcher{
+	errFetchCtx := rights.NewContextWithFetcher(test.Context(), &mockFetcher{
 		authInfoError:     mockErr,
 		applicationError:  mockErr,
 		clientError:       mockErr,
@@ -183,7 +184,7 @@ func TestRequire(t *testing.T) {
 	a.So(errFetchEntityRes.UsrErr, should.Resemble, mockErr)
 
 	errPermissionDenied := status.New(codes.PermissionDenied, "permission denied").Err()
-	permissionDeniedFetchCtx := NewContextWithFetcher(test.Context(), &mockFetcher{
+	permissionDeniedFetchCtx := rights.NewContextWithFetcher(test.Context(), &mockFetcher{
 		authInfoError:     errPermissionDenied,
 		applicationError:  errPermissionDenied,
 		clientError:       errPermissionDenied,
