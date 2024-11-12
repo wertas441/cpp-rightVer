@@ -19,6 +19,8 @@ For details about compatibility between different releases, see the **Commitment
 
 ### Fixed
 
+- Fix OAuth client authorizations delete request in the Console.
+
 ### Security
 
 ## [3.32.2] - unreleased
