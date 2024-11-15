@@ -55,7 +55,7 @@ const AuthorizationSettings = () => {
 
   const handleDeleteAuthorization = React.useCallback(async () => {
     try {
-      await attachPromise(dispatch(deleteAuthorization(user_id, client_id)))
+      await dispatch(attachPromise(deleteAuthorization(user_id, client_id)))
       toast({
         title: client_id,
         message: m.deleteSuccess,
