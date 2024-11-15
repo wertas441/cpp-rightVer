@@ -426,7 +426,7 @@ func TestUsersCRUD(t *testing.T) {
 							},
 							Tutorials: &ttnpb.UserConsolePreferences_Tutorials{
 								SeenTutorials: []ttnpb.Tutorial{
-									ttnpb.Tutorial_LIVE_DATA_SPLIT_VIEW,
+									ttnpb.Tutorial_TUTORIAL_LIVE_DATA_SPLIT_VIEW,
 								},
 							},
 						},
@@ -468,7 +468,7 @@ func TestUsersCRUD(t *testing.T) {
 						should.Resemble,
 						&ttnpb.UserConsolePreferences_Tutorials{
 							SeenTutorials: []ttnpb.Tutorial{
-								ttnpb.Tutorial_LIVE_DATA_SPLIT_VIEW,
+								ttnpb.Tutorial_TUTORIAL_LIVE_DATA_SPLIT_VIEW,
 							},
 						},
 					)

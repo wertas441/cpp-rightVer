@@ -222,7 +222,7 @@ func (st *StoreTest) TestUserStoreCRUD(t *T) {
 					ApiKey: ttnpb.DashboardLayout_DASHBOARD_LAYOUT_LIST,
 				},
 				Tutorials: &ttnpb.UserConsolePreferences_Tutorials{
-					SeenTutorials: []ttnpb.Tutorial{ttnpb.Tutorial_LIVE_DATA_SPLIT_VIEW},
+					SeenTutorials: []ttnpb.Tutorial{ttnpb.Tutorial_TUTORIAL_LIVE_DATA_SPLIT_VIEW},
 				},
 			},
 		}, mask)
@@ -252,7 +252,7 @@ func (st *StoreTest) TestUserStoreCRUD(t *T) {
 						ApiKey: ttnpb.DashboardLayout_DASHBOARD_LAYOUT_LIST,
 					},
 					Tutorials: &ttnpb.UserConsolePreferences_Tutorials{
-						SeenTutorials: []ttnpb.Tutorial{ttnpb.Tutorial_LIVE_DATA_SPLIT_VIEW},
+						SeenTutorials: []ttnpb.Tutorial{ttnpb.Tutorial_TUTORIAL_LIVE_DATA_SPLIT_VIEW},
 					},
 				},
 			)
