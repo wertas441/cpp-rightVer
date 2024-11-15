@@ -52171,6 +52171,19 @@
               "description": ""
             }
           ]
+        },
+        {
+          "name": "Tutorial",
+          "longName": "Tutorial",
+          "fullName": "ttn.lorawan.v3.Tutorial",
+          "description": "Tutorial is a set of possible tutorials in the Console.",
+          "values": [
+            {
+              "name": "LIVE_DATA_SPLIT_VIEW",
+              "number": "0",
+              "description": ""
+            }
+          ]
         }
       ],
       "extensions": [],
@@ -54178,6 +54191,18 @@
               "isoneof": false,
               "oneofdecl": "",
               "defaultValue": ""
+            },
+            {
+              "name": "tutorials",
+              "description": "",
+              "label": "",
+              "type": "Tutorials",
+              "longType": "UserConsolePreferences.Tutorials",
+              "fullType": "ttn.lorawan.v3.UserConsolePreferences.Tutorials",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": ""
             }
           ]
         },
@@ -54507,6 +54532,42 @@
                       "created_at",
                       "-created_at"
                     ]
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Tutorials",
+          "longName": "UserConsolePreferences.Tutorials",
+          "fullName": "ttn.lorawan.v3.UserConsolePreferences.Tutorials",
+          "description": "",
+          "hasExtensions": false,
+          "hasFields": true,
+          "hasOneofs": false,
+          "extensions": [],
+          "fields": [
+            {
+              "name": "seen_tutorials",
+              "description": "",
+              "label": "repeated",
+              "type": "Tutorial",
+              "longType": "Tutorial",
+              "fullType": "ttn.lorawan.v3.Tutorial",
+              "ismap": false,
+              "isoneof": false,
+              "oneofdecl": "",
+              "defaultValue": "",
+              "options": {
+                "validate.rules": [
+                  {
+                    "name": "repeated.unique",
+                    "value": true
+                  },
+                  {
+                    "name": "repeated.items.enum.defined_only",
+                    "value": true
                   }
                 ]
               }

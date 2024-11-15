@@ -819,12 +819,14 @@
   - [Message `UserConsolePreferences`](#ttn.lorawan.v3.UserConsolePreferences)
   - [Message `UserConsolePreferences.DashboardLayouts`](#ttn.lorawan.v3.UserConsolePreferences.DashboardLayouts)
   - [Message `UserConsolePreferences.SortBy`](#ttn.lorawan.v3.UserConsolePreferences.SortBy)
+  - [Message `UserConsolePreferences.Tutorials`](#ttn.lorawan.v3.UserConsolePreferences.Tutorials)
   - [Message `UserSession`](#ttn.lorawan.v3.UserSession)
   - [Message `UserSessionIdentifiers`](#ttn.lorawan.v3.UserSessionIdentifiers)
   - [Message `UserSessions`](#ttn.lorawan.v3.UserSessions)
   - [Message `Users`](#ttn.lorawan.v3.Users)
   - [Enum `ConsoleTheme`](#ttn.lorawan.v3.ConsoleTheme)
   - [Enum `DashboardLayout`](#ttn.lorawan.v3.DashboardLayout)
+  - [Enum `Tutorial`](#ttn.lorawan.v3.Tutorial)
 - [File `ttn/lorawan/v3/user_services.proto`](#ttn/lorawan/v3/user_services.proto)
   - [Service `UserAccess`](#ttn.lorawan.v3.UserAccess)
   - [Service `UserBookmarkRegistry`](#ttn.lorawan.v3.UserBookmarkRegistry)
@@ -11634,6 +11636,7 @@ UserConsolePreferences is the message that defines the user preferences for the 
 | `console_theme` | [`ConsoleTheme`](#ttn.lorawan.v3.ConsoleTheme) |  |  |
 | `dashboard_layouts` | [`UserConsolePreferences.DashboardLayouts`](#ttn.lorawan.v3.UserConsolePreferences.DashboardLayouts) |  |  |
 | `sort_by` | [`UserConsolePreferences.SortBy`](#ttn.lorawan.v3.UserConsolePreferences.SortBy) |  |  |
+| `tutorials` | [`UserConsolePreferences.Tutorials`](#ttn.lorawan.v3.UserConsolePreferences.Tutorials) |  |  |
 
 ### <a name="ttn.lorawan.v3.UserConsolePreferences.DashboardLayouts">Message `UserConsolePreferences.DashboardLayouts`</a>
 
@@ -11673,6 +11676,18 @@ SortBy defines the field to which the Console will sort the display of entities.
 | `gateway` | <p>`string.in`: `[ gateway_id -gateway_id gateway_eui -gateway_eui name -name created_at -created_at]`</p> |
 | `organization` | <p>`string.in`: `[ organization_id -organization_id name -name created_at -created_at]`</p> |
 | `user` | <p>`string.in`: `[ user_id -user_id name -name primary_email_address -primary_email_address state -state admin -admin created_at -created_at]`</p> |
+
+### <a name="ttn.lorawan.v3.UserConsolePreferences.Tutorials">Message `UserConsolePreferences.Tutorials`</a>
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| `seen_tutorials` | [`Tutorial`](#ttn.lorawan.v3.Tutorial) | repeated |  |
+
+#### Field Rules
+
+| Field | Validations |
+| ----- | ----------- |
+| `seen_tutorials` | <p>`repeated.unique`: `true`</p><p>`repeated.items.enum.defined_only`: `true`</p> |
 
 ### <a name="ttn.lorawan.v3.UserSession">Message `UserSession`</a>
 
@@ -11737,6 +11752,14 @@ DashboardLayout is a set of possible layout values to be used in the Console.
 | `DASHBOARD_LAYOUT_TABLE` | 0 |  |
 | `DASHBOARD_LAYOUT_LIST` | 1 |  |
 | `DASHBOARD_LAYOUT_GRID` | 2 |  |
+
+### <a name="ttn.lorawan.v3.Tutorial">Enum `Tutorial`</a>
+
+Tutorial is a set of possible tutorials in the Console.
+
+| Name | Number | Description |
+| ---- | ------ | ----------- |
+| `LIVE_DATA_SPLIT_VIEW` | 0 |  |
 
 ## <a name="ttn/lorawan/v3/user_services.proto">File `ttn/lorawan/v3/user_services.proto`</a>
 
