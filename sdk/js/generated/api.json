@@ -52179,7 +52179,7 @@
           "description": "Tutorial is a set of possible tutorials in the Console.",
           "values": [
             {
-              "name": "LIVE_DATA_SPLIT_VIEW",
+              "name": "TUTORIAL_LIVE_DATA_SPLIT_VIEW",
               "number": "0",
               "description": ""
             }

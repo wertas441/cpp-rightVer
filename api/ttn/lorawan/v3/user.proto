@@ -47,7 +47,7 @@ enum ConsoleTheme {
 enum Tutorial {
   option (thethings.json.enum) = {marshal_as_string: true};
 
-  LIVE_DATA_SPLIT_VIEW = 0;
+  TUTORIAL_LIVE_DATA_SPLIT_VIEW = 0;
 }
 
 // DashboardLayout is a set of possible layout values to be used in the Console.
