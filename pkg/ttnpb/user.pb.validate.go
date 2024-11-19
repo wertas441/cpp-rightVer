@@ -4511,25 +4511,25 @@ func (m *UserConsolePreferences_Tutorials) ValidateFields(paths ...string) error
 	for name, subs := range _processPaths(append(paths[:0:0], paths...)) {
 		_ = subs
 		switch name {
-		case "seen_tutorials":
+		case "seen":
 
-			_UserConsolePreferences_Tutorials_SeenTutorials_Unique := make(map[Tutorial]struct{}, len(m.GetSeenTutorials()))
+			_UserConsolePreferences_Tutorials_Seen_Unique := make(map[Tutorial]struct{}, len(m.GetSeen()))
 
-			for idx, item := range m.GetSeenTutorials() {
+			for idx, item := range m.GetSeen() {
 				_, _ = idx, item
 
-				if _, exists := _UserConsolePreferences_Tutorials_SeenTutorials_Unique[item]; exists {
+				if _, exists := _UserConsolePreferences_Tutorials_Seen_Unique[item]; exists {
 					return UserConsolePreferences_TutorialsValidationError{
-						field:  fmt.Sprintf("seen_tutorials[%v]", idx),
+						field:  fmt.Sprintf("seen[%v]", idx),
 						reason: "repeated value must contain unique items",
 					}
 				} else {
-					_UserConsolePreferences_Tutorials_SeenTutorials_Unique[item] = struct{}{}
+					_UserConsolePreferences_Tutorials_Seen_Unique[item] = struct{}{}
 				}
 
 				if _, ok := Tutorial_name[int32(item)]; !ok {
 					return UserConsolePreferences_TutorialsValidationError{
-						field:  fmt.Sprintf("seen_tutorials[%v]", idx),
+						field:  fmt.Sprintf("seen[%v]", idx),
 						reason: "value must be one of the defined enum values",
 					}
 				}

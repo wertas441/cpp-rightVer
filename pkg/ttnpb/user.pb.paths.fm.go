@@ -22,7 +22,7 @@ var UserConsolePreferencesFieldPathsNested = []string{
 	"sort_by.organization",
 	"sort_by.user",
 	"tutorials",
-	"tutorials.seen_tutorials",
+	"tutorials.seen",
 }
 
 var UserConsolePreferencesFieldPathsTopLevel = []string{
@@ -54,7 +54,7 @@ var UserFieldPathsNested = []string{
 	"console_preferences.sort_by.organization",
 	"console_preferences.sort_by.user",
 	"console_preferences.tutorials",
-	"console_preferences.tutorials.seen_tutorials",
+	"console_preferences.tutorials.seen",
 	"contact_info",
 	"created_at",
 	"deleted_at",
@@ -162,7 +162,7 @@ var CreateUserRequestFieldPathsNested = []string{
 	"user.console_preferences.sort_by.organization",
 	"user.console_preferences.sort_by.user",
 	"user.console_preferences.tutorials",
-	"user.console_preferences.tutorials.seen_tutorials",
+	"user.console_preferences.tutorials.seen",
 	"user.contact_info",
 	"user.created_at",
 	"user.deleted_at",
@@ -218,7 +218,7 @@ var UpdateUserRequestFieldPathsNested = []string{
 	"user.console_preferences.sort_by.organization",
 	"user.console_preferences.sort_by.user",
 	"user.console_preferences.tutorials",
-	"user.console_preferences.tutorials.seen_tutorials",
+	"user.console_preferences.tutorials.seen",
 	"user.contact_info",
 	"user.created_at",
 	"user.deleted_at",
@@ -658,9 +658,9 @@ var UserConsolePreferences_SortByFieldPathsTopLevel = []string{
 	"user",
 }
 var UserConsolePreferences_TutorialsFieldPathsNested = []string{
-	"seen_tutorials",
+	"seen",
 }
 
 var UserConsolePreferences_TutorialsFieldPathsTopLevel = []string{
-	"seen_tutorials",
+	"seen",
 }

@@ -425,7 +425,7 @@ func TestUsersCRUD(t *testing.T) {
 								Overview:     ttnpb.DashboardLayout_DASHBOARD_LAYOUT_GRID,
 							},
 							Tutorials: &ttnpb.UserConsolePreferences_Tutorials{
-								SeenTutorials: []ttnpb.Tutorial{
+								Seen: []ttnpb.Tutorial{
 									ttnpb.Tutorial_TUTORIAL_LIVE_DATA_SPLIT_VIEW,
 								},
 							},
@@ -467,7 +467,7 @@ func TestUsersCRUD(t *testing.T) {
 						got.ConsolePreferences.GetTutorials(),
 						should.Resemble,
 						&ttnpb.UserConsolePreferences_Tutorials{
-							SeenTutorials: []ttnpb.Tutorial{
+							Seen: []ttnpb.Tutorial{
 								ttnpb.Tutorial_TUTORIAL_LIVE_DATA_SPLIT_VIEW,
 							},
 						},

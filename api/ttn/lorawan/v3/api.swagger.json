@@ -19013,7 +19013,7 @@
     "UserConsolePreferencesTutorials": {
       "type": "object",
       "properties": {
-        "seen_tutorials": {
+        "seen": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/v3Tutorial"

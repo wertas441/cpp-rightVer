@@ -11681,13 +11681,13 @@ SortBy defines the field to which the Console will sort the display of entities.
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| `seen_tutorials` | [`Tutorial`](#ttn.lorawan.v3.Tutorial) | repeated |  |
+| `seen` | [`Tutorial`](#ttn.lorawan.v3.Tutorial) | repeated |  |
 
 #### Field Rules
 
 | Field | Validations |
 | ----- | ----------- |
-| `seen_tutorials` | <p>`repeated.unique`: `true`</p><p>`repeated.items.enum.defined_only`: `true`</p> |
+| `seen` | <p>`repeated.unique`: `true`</p><p>`repeated.items.enum.defined_only`: `true`</p> |
 
 ### <a name="ttn.lorawan.v3.UserSession">Message `UserSession`</a>
 

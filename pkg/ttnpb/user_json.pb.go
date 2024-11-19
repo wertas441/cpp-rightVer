@@ -251,12 +251,12 @@ func (x *UserConsolePreferences_Tutorials) MarshalProtoJSON(s *jsonplugin.Marsha
 	}
 	s.WriteObjectStart()
 	var wroteField bool
-	if len(x.SeenTutorials) > 0 || s.HasField("seen_tutorials") {
+	if len(x.Seen) > 0 || s.HasField("seen") {
 		s.WriteMoreIf(&wroteField)
-		s.WriteObjectField("seen_tutorials")
+		s.WriteObjectField("seen")
 		s.WriteArrayStart()
 		var wroteElement bool
-		for _, element := range x.SeenTutorials {
+		for _, element := range x.Seen {
 			s.WriteMoreIf(&wroteElement)
 			element.MarshalProtoJSON(s)
 		}
@@ -279,16 +279,16 @@ func (x *UserConsolePreferences_Tutorials) UnmarshalProtoJSON(s *jsonplugin.Unma
 		switch key {
 		default:
 			s.ReadAny() // ignore unknown field
-		case "seen_tutorials", "seenTutorials":
-			s.AddField("seen_tutorials")
+		case "seen":
+			s.AddField("seen")
 			if s.ReadNil() {
-				x.SeenTutorials = nil
+				x.Seen = nil
 				return
 			}
 			s.ReadArray(func() {
 				var v Tutorial
 				v.UnmarshalProtoJSON(s)
-				x.SeenTutorials = append(x.SeenTutorials, v)
+				x.Seen = append(x.Seen, v)
 			})
 		}
 	})

@@ -180,7 +180,7 @@ message UserConsolePreferences {
   SortBy sort_by = 3;
 
   message Tutorials {
-    repeated Tutorial seen_tutorials = 1 [(validate.rules).repeated = {
+    repeated Tutorial seen = 1 [(validate.rules).repeated = {
       unique: true,
       items: {
         enum: {defined_only: true}

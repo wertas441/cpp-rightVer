@@ -2024,14 +2024,14 @@ func (dst *UserConsolePreferences_SortBy) SetFields(src *UserConsolePreferences_
 func (dst *UserConsolePreferences_Tutorials) SetFields(src *UserConsolePreferences_Tutorials, paths ...string) error {
 	for name, subs := range _processPaths(paths) {
 		switch name {
-		case "seen_tutorials":
+		case "seen":
 			if len(subs) > 0 {
-				return fmt.Errorf("'seen_tutorials' has no subfields, but %s were specified", subs)
+				return fmt.Errorf("'seen' has no subfields, but %s were specified", subs)
 			}
 			if src != nil {
-				dst.SeenTutorials = src.SeenTutorials
+				dst.Seen = src.Seen
 			} else {
-				dst.SeenTutorials = nil
+				dst.Seen = nil
 			}
 
 		default:

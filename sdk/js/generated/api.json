@@ -54549,7 +54549,7 @@
           "extensions": [],
           "fields": [
             {
-              "name": "seen_tutorials",
+              "name": "seen",
               "description": "",
               "label": "repeated",
               "type": "Tutorial",
