@@ -138,7 +138,9 @@ var (
 // AddCA adds the CA certificate file.
 func AddCA(pemBytes []byte) (err error) {
 	if tlsConfig == nil {
-		tlsConfig = &tls.Config{}
+		tlsConfig = &tls.Config{
+			MinVersion: tls.VersionTLS12,
+		}
 	}
 	rootCAs := tlsConfig.RootCAs
 	if rootCAs == nil {
