@@ -405,6 +405,8 @@
   "console.containers.applications-table.index.purgeSuccess": "",
   "console.containers.applications-table.index.purgeFail": "",
   "console.containers.applications-table.index.otherClusterTooltip": "",
+  "console.containers.applications-table.index.myApplications": "",
+  "console.containers.applications-table.index.myApplicationsTooltip": "",
   "console.containers.deployment-component-status.index.availableComponents": "",
   "console.containers.deployment-component-status.index.versionInfo": "",
   "console.containers.deployment-component-status.index.statusPage": "",
