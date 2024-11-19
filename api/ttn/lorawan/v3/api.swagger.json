@@ -29050,9 +29050,10 @@
     "v3Tutorial": {
       "type": "string",
       "enum": [
+        "TUTORIAL_UNKNOWN",
         "TUTORIAL_LIVE_DATA_SPLIT_VIEW"
       ],
-      "default": "TUTORIAL_LIVE_DATA_SPLIT_VIEW",
+      "default": "TUTORIAL_UNKNOWN",
       "description": "Tutorial is a set of possible tutorials in the Console."
     },
     "v3TxAcknowledgment": {

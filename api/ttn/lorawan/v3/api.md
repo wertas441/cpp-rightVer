@@ -11759,7 +11759,8 @@ Tutorial is a set of possible tutorials in the Console.
 
 | Name | Number | Description |
 | ---- | ------ | ----------- |
-| `TUTORIAL_LIVE_DATA_SPLIT_VIEW` | 0 |  |
+| `TUTORIAL_UNKNOWN` | 0 |  |
+| `TUTORIAL_LIVE_DATA_SPLIT_VIEW` | 1 |  |
 
 ## <a name="ttn/lorawan/v3/user_services.proto">File `ttn/lorawan/v3/user_services.proto`</a>
 
