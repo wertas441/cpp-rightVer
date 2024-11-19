@@ -19010,6 +19010,17 @@
       },
       "description": "SortBy defines the field to which the Console will sort the display of entities."
     },
+    "UserConsolePreferencesTutorials": {
+      "type": "object",
+      "properties": {
+        "seen": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/v3Tutorial"
+          }
+        }
+      }
+    },
     "UserRegistrationAdminApproval": {
       "type": "object",
       "properties": {
@@ -29036,6 +29047,15 @@
         }
       }
     },
+    "v3Tutorial": {
+      "type": "string",
+      "enum": [
+        "TUTORIAL_UNKNOWN",
+        "TUTORIAL_LIVE_DATA_SPLIT_VIEW"
+      ],
+      "default": "TUTORIAL_UNKNOWN",
+      "description": "Tutorial is a set of possible tutorials in the Console."
+    },
     "v3TxAcknowledgment": {
       "type": "object",
       "properties": {
@@ -29383,6 +29403,9 @@
         },
         "sort_by": {
           "$ref": "#/definitions/UserConsolePreferencesSortBy"
+        },
+        "tutorials": {
+          "$ref": "#/definitions/UserConsolePreferencesTutorials"
         }
       },
       "description": "UserConsolePreferences is the message that defines the user preferences for the Console."

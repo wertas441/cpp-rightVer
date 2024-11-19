@@ -597,6 +597,9 @@ func (s *userStore) updateUserModel( //nolint:gocyclo
 		case "console_preferences.sort_by":
 			updateConsolePreferences = true
 			consolePreferences.SortBy = pb.ConsolePreferences.GetSortBy()
+		case "console_preferences.tutorials":
+			updateConsolePreferences = true
+			consolePreferences.Tutorials = pb.ConsolePreferences.GetTutorials()
 		case "universal_rights":
 			columns = append(columns, "universal_rights")
 		}

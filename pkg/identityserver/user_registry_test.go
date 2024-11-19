@@ -424,12 +424,18 @@ func TestUsersCRUD(t *testing.T) {
 								User:         ttnpb.DashboardLayout_DASHBOARD_LAYOUT_GRID,
 								Overview:     ttnpb.DashboardLayout_DASHBOARD_LAYOUT_GRID,
 							},
+							Tutorials: &ttnpb.UserConsolePreferences_Tutorials{
+								Seen: []ttnpb.Tutorial{
+									ttnpb.Tutorial_TUTORIAL_LIVE_DATA_SPLIT_VIEW,
+								},
+							},
 						},
 					},
 					FieldMask: ttnpb.FieldMask(
 						"console_preferences.console_theme",
 						"console_preferences.dashboard_layouts",
 						"console_preferences.sort_by",
+						"console_preferences.tutorials",
 					),
 				}, creds)
 				if a.So(err, should.BeNil) {
@@ -455,6 +461,15 @@ func TestUsersCRUD(t *testing.T) {
 							Organization: ttnpb.DashboardLayout_DASHBOARD_LAYOUT_GRID,
 							User:         ttnpb.DashboardLayout_DASHBOARD_LAYOUT_GRID,
 							Overview:     ttnpb.DashboardLayout_DASHBOARD_LAYOUT_GRID,
+						},
+					)
+					a.So(
+						got.ConsolePreferences.GetTutorials(),
+						should.Resemble,
+						&ttnpb.UserConsolePreferences_Tutorials{
+							Seen: []ttnpb.Tutorial{
+								ttnpb.Tutorial_TUTORIAL_LIVE_DATA_SPLIT_VIEW,
+							},
 						},
 					)
 				}

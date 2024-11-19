@@ -58,6 +58,46 @@ func (x *ConsoleTheme) UnmarshalJSON(b []byte) error {
 	return jsonplugin.DefaultUnmarshalerConfig.Unmarshal(b, x)
 }
 
+// MarshalProtoJSON marshals the Tutorial to JSON.
+func (x Tutorial) MarshalProtoJSON(s *jsonplugin.MarshalState) {
+	s.WriteEnumString(int32(x), Tutorial_name)
+}
+
+// MarshalText marshals the Tutorial to text.
+func (x Tutorial) MarshalText() ([]byte, error) {
+	return []byte(jsonplugin.GetEnumString(int32(x), Tutorial_name)), nil
+}
+
+// MarshalJSON marshals the Tutorial to JSON.
+func (x Tutorial) MarshalJSON() ([]byte, error) {
+	return jsonplugin.DefaultMarshalerConfig.Marshal(x)
+}
+
+// UnmarshalProtoJSON unmarshals the Tutorial from JSON.
+func (x *Tutorial) UnmarshalProtoJSON(s *jsonplugin.UnmarshalState) {
+	v := s.ReadEnum(Tutorial_value)
+	if err := s.Err(); err != nil {
+		s.SetErrorf("could not read Tutorial enum: %v", err)
+		return
+	}
+	*x = Tutorial(v)
+}
+
+// UnmarshalText unmarshals the Tutorial from text.
+func (x *Tutorial) UnmarshalText(b []byte) error {
+	i, err := jsonplugin.ParseEnumString(string(b), Tutorial_value)
+	if err != nil {
+		return err
+	}
+	*x = Tutorial(i)
+	return nil
+}
+
+// UnmarshalJSON unmarshals the Tutorial from JSON.
+func (x *Tutorial) UnmarshalJSON(b []byte) error {
+	return jsonplugin.DefaultUnmarshalerConfig.Unmarshal(b, x)
+}
+
 // MarshalProtoJSON marshals the DashboardLayout to JSON.
 func (x DashboardLayout) MarshalProtoJSON(s *jsonplugin.MarshalState) {
 	s.WriteEnumString(int32(x), DashboardLayout_name)
@@ -203,6 +243,62 @@ func (x *UserConsolePreferences_DashboardLayouts) UnmarshalJSON(b []byte) error 
 	return jsonplugin.DefaultUnmarshalerConfig.Unmarshal(b, x)
 }
 
+// MarshalProtoJSON marshals the UserConsolePreferences_Tutorials message to JSON.
+func (x *UserConsolePreferences_Tutorials) MarshalProtoJSON(s *jsonplugin.MarshalState) {
+	if x == nil {
+		s.WriteNil()
+		return
+	}
+	s.WriteObjectStart()
+	var wroteField bool
+	if len(x.Seen) > 0 || s.HasField("seen") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("seen")
+		s.WriteArrayStart()
+		var wroteElement bool
+		for _, element := range x.Seen {
+			s.WriteMoreIf(&wroteElement)
+			element.MarshalProtoJSON(s)
+		}
+		s.WriteArrayEnd()
+	}
+	s.WriteObjectEnd()
+}
+
+// MarshalJSON marshals the UserConsolePreferences_Tutorials to JSON.
+func (x *UserConsolePreferences_Tutorials) MarshalJSON() ([]byte, error) {
+	return jsonplugin.DefaultMarshalerConfig.Marshal(x)
+}
+
+// UnmarshalProtoJSON unmarshals the UserConsolePreferences_Tutorials message from JSON.
+func (x *UserConsolePreferences_Tutorials) UnmarshalProtoJSON(s *jsonplugin.UnmarshalState) {
+	if s.ReadNil() {
+		return
+	}
+	s.ReadObject(func(key string) {
+		switch key {
+		default:
+			s.ReadAny() // ignore unknown field
+		case "seen":
+			s.AddField("seen")
+			if s.ReadNil() {
+				x.Seen = nil
+				return
+			}
+			s.ReadArray(func() {
+				var v Tutorial
+				v.UnmarshalProtoJSON(s)
+				x.Seen = append(x.Seen, v)
+			})
+		}
+	})
+}
+
+// UnmarshalJSON unmarshals the UserConsolePreferences_Tutorials from JSON.
+func (x *UserConsolePreferences_Tutorials) UnmarshalJSON(b []byte) error {
+	return jsonplugin.DefaultUnmarshalerConfig.Unmarshal(b, x)
+}
+
 // MarshalProtoJSON marshals the UserConsolePreferences message to JSON.
 func (x *UserConsolePreferences) MarshalProtoJSON(s *jsonplugin.MarshalState) {
 	if x == nil {
@@ -226,6 +322,11 @@ func (x *UserConsolePreferences) MarshalProtoJSON(s *jsonplugin.MarshalState) {
 		s.WriteObjectField("sort_by")
 		// NOTE: UserConsolePreferences_SortBy does not seem to implement MarshalProtoJSON.
 		golang.MarshalMessage(s, x.SortBy)
+	}
+	if x.Tutorials != nil || s.HasField("tutorials") {
+		s.WriteMoreIf(&wroteField)
+		s.WriteObjectField("tutorials")
+		x.Tutorials.MarshalProtoJSON(s.WithField("tutorials"))
 	}
 	s.WriteObjectEnd()
 }
@@ -264,6 +365,13 @@ func (x *UserConsolePreferences) UnmarshalProtoJSON(s *jsonplugin.UnmarshalState
 			var v UserConsolePreferences_SortBy
 			golang.UnmarshalMessage(s, &v)
 			x.SortBy = &v
+		case "tutorials":
+			if s.ReadNil() {
+				x.Tutorials = nil
+				return
+			}
+			x.Tutorials = &UserConsolePreferences_Tutorials{}
+			x.Tutorials.UnmarshalProtoJSON(s.WithField("tutorials", true))
 		}
 	})
 }

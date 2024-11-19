@@ -19,6 +19,8 @@ func AddSelectFlagsForUserConsolePreferences(flags *pflag.FlagSet, prefix string
 	// NOTE: dashboard_layouts (UserConsolePreferences_DashboardLayouts) does not seem to have select flags.
 	flags.AddFlag(flagsplugin.NewBoolFlag(flagsplugin.Prefix("sort-by", prefix), flagsplugin.SelectDesc(flagsplugin.Prefix("sort-by", prefix), true), flagsplugin.WithHidden(hidden)))
 	// NOTE: sort_by (UserConsolePreferences_SortBy) does not seem to have select flags.
+	flags.AddFlag(flagsplugin.NewBoolFlag(flagsplugin.Prefix("tutorials", prefix), flagsplugin.SelectDesc(flagsplugin.Prefix("tutorials", prefix), true), flagsplugin.WithHidden(hidden)))
+	// NOTE: tutorials (UserConsolePreferences_Tutorials) does not seem to have select flags.
 }
 
 // SelectFromFlags outputs the fieldmask paths forUserConsolePreferences message from select flags.
@@ -40,6 +42,12 @@ func PathsFromSelectFlagsForUserConsolePreferences(flags *pflag.FlagSet, prefix 
 		paths = append(paths, flagsplugin.Prefix("sort_by", prefix))
 	}
 	// NOTE: sort_by (UserConsolePreferences_SortBy) does not seem to have select flags.
+	if val, selected, err := flagsplugin.GetBool(flags, flagsplugin.Prefix("tutorials", prefix)); err != nil {
+		return nil, err
+	} else if selected && val {
+		paths = append(paths, flagsplugin.Prefix("tutorials", prefix))
+	}
+	// NOTE: tutorials (UserConsolePreferences_Tutorials) does not seem to have select flags.
 	return paths, nil
 }
 
@@ -48,6 +56,7 @@ func AddSetFlagsForUserConsolePreferences(flags *pflag.FlagSet, prefix string, h
 	flags.AddFlag(flagsplugin.NewStringFlag(flagsplugin.Prefix("console-theme", prefix), flagsplugin.EnumValueDesc(ConsoleTheme_value), flagsplugin.WithHidden(hidden)))
 	// FIXME: Skipping DashboardLayouts because it does not seem to implement AddSetFlags.
 	// FIXME: Skipping SortBy because it does not seem to implement AddSetFlags.
+	// FIXME: Skipping Tutorials because it does not seem to implement AddSetFlags.
 }
 
 // SetFromFlags sets the UserConsolePreferences message from flags.
@@ -64,6 +73,7 @@ func (m *UserConsolePreferences) SetFromFlags(flags *pflag.FlagSet, prefix strin
 	}
 	// FIXME: Skipping DashboardLayouts because it does not seem to implement AddSetFlags.
 	// FIXME: Skipping SortBy because it does not seem to implement AddSetFlags.
+	// FIXME: Skipping Tutorials because it does not seem to implement AddSetFlags.
 	return paths, nil
 }
 

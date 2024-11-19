@@ -43,6 +43,14 @@ enum ConsoleTheme {
   CONSOLE_THEME_DARK = 2;
 }
 
+// Tutorial is a set of possible tutorials in the Console.
+enum Tutorial {
+  option (thethings.json.enum) = {marshal_as_string: true};
+
+  TUTORIAL_UNKNOWN = 0;
+  TUTORIAL_LIVE_DATA_SPLIT_VIEW = 1;
+}
+
 // DashboardLayout is a set of possible layout values to be used in the Console.
 enum DashboardLayout {
   option (thethings.json.enum) = {
@@ -171,6 +179,16 @@ message UserConsolePreferences {
     }];
   }
   SortBy sort_by = 3;
+
+  message Tutorials {
+    repeated Tutorial seen = 1 [(validate.rules).repeated = {
+      unique: true,
+      items: {
+        enum: {defined_only: true}
+      }
+    }];
+  }
+  Tutorials tutorials = 4;
 }
 
 // User is the message that defines a user on the network.

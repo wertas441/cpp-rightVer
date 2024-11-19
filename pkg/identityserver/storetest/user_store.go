@@ -221,6 +221,9 @@ func (st *StoreTest) TestUserStoreCRUD(t *T) {
 				DashboardLayouts: &ttnpb.UserConsolePreferences_DashboardLayouts{
 					ApiKey: ttnpb.DashboardLayout_DASHBOARD_LAYOUT_LIST,
 				},
+				Tutorials: &ttnpb.UserConsolePreferences_Tutorials{
+					Seen: []ttnpb.Tutorial{ttnpb.Tutorial_TUTORIAL_LIVE_DATA_SPLIT_VIEW},
+				},
 			},
 		}, mask)
 		if a.So(err, should.BeNil) && a.So(updated, should.NotBeNil) {
@@ -247,6 +250,9 @@ func (st *StoreTest) TestUserStoreCRUD(t *T) {
 					ConsoleTheme: ttnpb.ConsoleTheme_CONSOLE_THEME_DARK,
 					DashboardLayouts: &ttnpb.UserConsolePreferences_DashboardLayouts{
 						ApiKey: ttnpb.DashboardLayout_DASHBOARD_LAYOUT_LIST,
+					},
+					Tutorials: &ttnpb.UserConsolePreferences_Tutorials{
+						Seen: []ttnpb.Tutorial{ttnpb.Tutorial_TUTORIAL_LIVE_DATA_SPLIT_VIEW},
 					},
 				},
 			)

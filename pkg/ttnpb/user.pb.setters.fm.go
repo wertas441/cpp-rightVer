@@ -66,6 +66,31 @@ func (dst *UserConsolePreferences) SetFields(src *UserConsolePreferences, paths 
 					dst.SortBy = nil
 				}
 			}
+		case "tutorials":
+			if len(subs) > 0 {
+				var newDst, newSrc *UserConsolePreferences_Tutorials
+				if (src == nil || src.Tutorials == nil) && dst.Tutorials == nil {
+					continue
+				}
+				if src != nil {
+					newSrc = src.Tutorials
+				}
+				if dst.Tutorials != nil {
+					newDst = dst.Tutorials
+				} else {
+					newDst = &UserConsolePreferences_Tutorials{}
+					dst.Tutorials = newDst
+				}
+				if err := newDst.SetFields(newSrc, subs...); err != nil {
+					return err
+				}
+			} else {
+				if src != nil {
+					dst.Tutorials = src.Tutorials
+				} else {
+					dst.Tutorials = nil
+				}
+			}
 
 		default:
 			return fmt.Errorf("invalid field: '%s'", name)
@@ -1987,6 +2012,26 @@ func (dst *UserConsolePreferences_SortBy) SetFields(src *UserConsolePreferences_
 			} else {
 				var zero string
 				dst.User = zero
+			}
+
+		default:
+			return fmt.Errorf("invalid field: '%s'", name)
+		}
+	}
+	return nil
+}
+
+func (dst *UserConsolePreferences_Tutorials) SetFields(src *UserConsolePreferences_Tutorials, paths ...string) error {
+	for name, subs := range _processPaths(paths) {
+		switch name {
+		case "seen":
+			if len(subs) > 0 {
+				return fmt.Errorf("'seen' has no subfields, but %s were specified", subs)
+			}
+			if src != nil {
+				dst.Seen = src.Seen
+			} else {
+				dst.Seen = nil
 			}
 
 		default:
