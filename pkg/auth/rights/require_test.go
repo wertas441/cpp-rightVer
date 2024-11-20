@@ -35,16 +35,20 @@ func requireAuthInfo(ctx context.Context) (res struct {
 },
 ) {
 	var wg sync.WaitGroup
+	var universalErr, isAdminErr error
 	wg.Add(2)
 	go func() {
-		res.UniversalErr = rights.RequireUniversal(ctx, ttnpb.Right_RIGHT_SEND_INVITES)
+		universalErr = rights.RequireUniversal(ctx, ttnpb.Right_RIGHT_SEND_INVITES)
 		wg.Done()
 	}()
 	go func() {
-		res.IsAdminErr = rights.RequireIsAdmin(ctx)
+		isAdminErr = rights.RequireIsAdmin(ctx)
 		wg.Done()
 	}()
 	wg.Wait()
+
+	res.UniversalErr = universalErr
+	res.IsAdminErr = isAdminErr
 	return res
 }
 
@@ -57,38 +61,53 @@ func requireRights(ctx context.Context, id string) (res struct {
 },
 ) {
 	var wg sync.WaitGroup
+	var (
+		appErr error
+		cliErr error
+		gtwErr error
+		orgErr error
+		usrErr error
+	)
+
 	wg.Add(5)
 	go func() {
-		res.AppErr = rights.RequireApplication(ctx, &ttnpb.ApplicationIdentifiers{
+		appErr = rights.RequireApplication(ctx, &ttnpb.ApplicationIdentifiers{
 			ApplicationId: id,
 		}, ttnpb.Right_RIGHT_APPLICATION_INFO)
 		wg.Done()
 	}()
 	go func() {
-		res.CliErr = rights.RequireClient(ctx, &ttnpb.ClientIdentifiers{
+		cliErr = rights.RequireClient(ctx, &ttnpb.ClientIdentifiers{
 			ClientId: id,
 		}, ttnpb.Right_RIGHT_CLIENT_INFO)
 		wg.Done()
 	}()
 	go func() {
-		res.GtwErr = rights.RequireGateway(ctx, &ttnpb.GatewayIdentifiers{
+		gtwErr = rights.RequireGateway(ctx, &ttnpb.GatewayIdentifiers{
 			GatewayId: id,
 		}, ttnpb.Right_RIGHT_GATEWAY_INFO)
 		wg.Done()
 	}()
 	go func() {
-		res.OrgErr = rights.RequireOrganization(ctx, &ttnpb.OrganizationIdentifiers{
+		orgErr = rights.RequireOrganization(ctx, &ttnpb.OrganizationIdentifiers{
 			OrganizationId: id,
 		}, ttnpb.Right_RIGHT_ORGANIZATION_INFO)
 		wg.Done()
 	}()
 	go func() {
-		res.UsrErr = rights.RequireUser(ctx, &ttnpb.UserIdentifiers{
+		usrErr = rights.RequireUser(ctx, &ttnpb.UserIdentifiers{
 			UserId: id,
 		}, ttnpb.Right_RIGHT_USER_INFO)
 		wg.Done()
 	}()
 	wg.Wait()
+
+	res.AppErr = appErr
+	res.CliErr = cliErr
+	res.GtwErr = gtwErr
+	res.OrgErr = orgErr
+	res.UsrErr = usrErr
+
 	return res
 }
 

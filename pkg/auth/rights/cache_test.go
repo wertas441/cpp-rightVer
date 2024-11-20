@@ -43,7 +43,10 @@ func TestCache(t *testing.T) {
 
 	mockFetcher := &mockFetcher{}
 
-	c := rights.NewInMemoryCache(mockFetcher, 5*time.Minute, time.Minute).(*rights.InMemoryCache)
+	c, ok := rights.NewInMemoryCache(mockFetcher, 5*time.Minute, time.Minute).(*rights.InMemoryCache)
+	if !ok {
+		t.Fatal("Failed to create in-memory cache")
+	}
 
 	mockFetcher.authInfoError = mockErr
 	mockFetcher.applicationError = mockErr

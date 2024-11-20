@@ -31,7 +31,7 @@ import (
 	"google.golang.org/protobuf/types/known/emptypb"
 )
 
-func fetchEntityRights(ctx context.Context, id string, f rights.EntityFetcher) (res struct {
+func fetchEntityRights(ctx context.Context, id string, f rights.EntityFetcher) (res struct { // nolint:unparam
 	AppRights *ttnpb.Rights
 	AppErr    error
 	CliRights *ttnpb.Rights
