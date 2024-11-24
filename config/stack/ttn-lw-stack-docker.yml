@@ -1,102 +1,47 @@
-# Example ttn-lw-stack configuration file
-
 # Identity Server configuration
-# is:
-  # Email configuration for "thethings.example.com"
-  # email:
-    # sender-name: 'The Things Stack'
-    # sender-address: 'noreply@thethings.example.com'
-    # network:
-    #   name: 'The Things Stack'
-    #   console-url: 'https://thethings.example.com/console'
-    #   identity-server-url: 'https://thethings.example.com/oauth'
+is:
+  database-uri: postgres://root:root@postgres:5432/ttn_lorawan_dev?sslmode=disable
+  oauth:
+    ui:
+      enabled: true
+      canonical-url: 'http://localhost:1885/oauth'
+    authorize:
+      force: false
+    client-registry:
+      clients:
+        console:
+          secret: ''  # empty secret for development
+          redirect-uris: ['http://localhost:1885/console/oauth/callback']
+          rights: ['RIGHT_ALL']
+          grants: ['authorization_code', 'refresh_token']
+    ui:
+      canonical-url: 'http://localhost:1885/oauth'
+      is:
+        base-url: 'http://localhost:1885/api/v3'
 
-    # If sending email with Sendgrid
-    # provider: sendgrid
-    # sendgrid:
-    #   api-key: '...'              # enter Sendgrid API key
-
-    # If sending email with SMTP
-    # provider: smtp
-    # smtp:
-    #   address:  '...'             # enter SMTP server address
-    #   username: '...'             # enter SMTP server username
-    #   password: '...'             # enter SMTP server password
-
-  # Web UI configuration for "thethings.example.com":
-  # oauth:
-  #   ui:
-  #     canonical-url: 'https://thethings.example.com/oauth'
-  #     is:
-  #       base-url: 'https://thethings.example.com/api/v3'
+# Console configuration
+console:
+  oauth:
+    client-id: 'console'
+    client-secret: ''
+    authorize-url: 'http://localhost:1885/oauth/authorize'
+    token-url: 'http://localhost:1885/oauth/token'
+  ui:
+    enabled: true
+    canonical-url: 'http://localhost:1885/console'
+    is:
+      base-url: 'http://localhost:1885/api/v3'
+    gs:
+      base-url: 'http://localhost:1885/api/v3'
+    ns:
+      base-url: 'http://localhost:1885/api/v3'
+    as:
+      base-url: 'http://localhost:1885/api/v3'
+    js:
+      base-url: 'http://localhost:1885/api/v3'
 
 # HTTP server configuration
-# http:
-#   cookie:
-#     block-key: '...'                # generate 32 bytes (openssl rand -hex 32)
-#     hash-key: '...'                 # generate 64 bytes (openssl rand -hex 64)
-#   metrics:
-#     password: 'metrics'               # choose a password
-#   pprof:
-#     password: 'pprof'                 # choose a password
-
-# If using custom certificates:
-tls:
-  source: file
-  root-ca: /run/secrets/ca.pem
-  certificate: /run/secrets/cert.pem
-  key: /run/secrets/key.pem
-
-# Let's encrypt for "thethings.example.com"
-# tls:
-#   source: 'acme'
-#   acme:
-#     dir: '/var/lib/acme'
-#     email: 'you@thethings.example.com'
-#     hosts: ['thethings.example.com']
-#     default-host: 'thethings.example.com'
-
-# If Gateway Server enabled, defaults for "thethings.example.com":
-# gs:
-#   mqtt:
-#     public-address: 'thethings.example.com:1882'
-#     public-tls-address: 'thethings.example.com:8882'
-#   mqtt-v2:
-#     public-address: 'thethings.example.com:1881'
-#     public-tls-address: 'thethings.example.com:8881'
-
-# If Gateway Configuration Server enabled, defaults for "thethings.example.com":
-# gcs:
-#   basic-station:
-#     default:
-#       lns-uri: 'wss://thethings.example.com:8887'
-#   the-things-gateway:
-#     default:
-#       mqtt-server: 'mqtts://thethings.example.com:8881'
-
-# Web UI configuration for "thethings.example.com":
-# console:
-#   ui:
-#     canonical-url: 'https://thethings.example.com/console'
-#     is:
-#       base-url: 'https://thethings.example.com/api/v3'
-#     gs:
-#       base-url: 'https://thethings.example.com/api/v3'
-#     ns:
-#       base-url: 'https://thethings.example.com/api/v3'
-#     as:
-#       base-url: 'https://thethings.example.com/api/v3'
-#     js:
-#       base-url: 'https://thethings.example.com/api/v3'
-#     qrg:
-#       base-url: 'https://thethings.example.com/api/v3'
-#     edtc:
-#       base-url: 'https://thethings.example.com/api/v3'
-#     dcs:
-#       base-url: 'https://thethings.example.com/api/v3'
-#
-#   oauth:
-#     authorize-url: 'https://thethings.example.com/oauth/authorize'
-#     token-url: 'https://thethings.example.com/oauth/token'
-#     client-id: 'console'
-#     client-secret: 'console'          # choose or generate a secret
+http:
+  cookie:
+    hash-key: '704228a131af1bff5678e5262cac65ca3c62faebeb1219d1a1fdbd9be1c5213b50374cad6eff096d78769310eee07da93ccae1f5f88d2961b19d9e758e83f923'
+    block-key: 'cda0a061be0600b723b300bf90a52c13d161521059c48e32970a847009675b6f'

@@ -1,0 +1,10 @@
+oauth:
+  clients:
+    console:
+      client-id: "console"
+      client-secret: ""
+      redirect-uris:
+        - "http://localhost:1885/console/oauth/callback"
+      rights:
+        - RIGHT_ALL
+      state: "APPROVED"
